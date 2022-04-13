@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Strings</title>
+</head>
+<body>
+    <nav>
+        <h1>Página Teste</h1>
+    </nav>
+    
+    <div id="res">
+        <input type="button" value="Clique aqui para iniciar!" onclick="clicou()" class="botao" id="botao">
+    </div>
+    <script>
+        function clicou() {
+            var nome1 = (window.prompt("Por favor, insira o seu nome."))
+            var nome = nome1.charAt(0).toUpperCase() + nome1.slice(1);
+            var res = window.document.querySelector("div#res")
+            var p = document.createElement('p');
+            var bots = document.createElement("button");
+            var botn = document.createElement("button");
+            var load = document.getElementById("load");
+
+            function isNumber(nome) {
+                let numbers = nome.replace(/[^0-9]/g, '');
+
+                function capFirst(nome) {
+                    let subst = nome.toLowerCase().replace(/(^|\s)\S/g, function(a) { return a.toUpperCase(); });
+                    return subst;
+                }
+
+                if(Number(numbers) || nome.trim().length == 0) {
+                    alert("DIGITE ALGUM TEXTO!!")
+                    location.reload();
+                } else if (confirm(`Seu nome é ${nome}?`) == false) {
+                        alert('Preencha seu nome corretamente.')
+                        location.reload();
+                }
+            }
+            console.log(isNumber(nome))
+
+            res.innerHTML = ""
+
+            p.innerHTML = `Olá ${nome}, o intuito deste site é mostrar algumas formatações de um nome ou de uma frase que o usuário venha à digitar.`;
+            res.append(p);
+
+            p =  document.createElement('p');
+            p.innerHTML = `${nome}, você quer fazer o teste?`;
+            res.append(p);
+              
+            /*let div = document.createElement("div");
+            res.append(div);*/
+
+            bots.innerHTML = "Sim";
+            res.append(bots);
+            
+            botn.innerHTML = "Não";
+            res.append(botn);
+
+            bots.addEventListener("click", clicks);
+            botn.addEventListener("click", clickn);
+
+            function clicks() {
+                res.innerHTML = ""
+
+                p = document.createElement('p');
+                p.innerHTML = "Por favor, digite abaixo seu nome completo:";
+                res.append(p);
+                p.style.margin = "0rem"
+
+                var nomec = document.createElement("input");
+                res.append(nomec);
+                
+                let botão = document.createElement("button");
+                botão.innerHTML = "Verificar";
+                res.append(botão);
+
+                botão.addEventListener("click", verificar);
+
+                function verificar() {
+                    res.innerHTML = "";
+
+                    p.innerText = `${nomec.value.charAt(0).toLocaleUpperCase()}?`;
+                    res.append(p);
+                    p.style.textAlign = "initial";
+                    
+                    p = document.createElement('p');
+                    p.innerText = `Seu nome em maiúsculas é ${nomec.value.toUpperCase()}`;
+                    res.append(p);
+                    p.style.textAlign = "initial";
+
+                    p = document.createElement('p');
+                    p.innerText = `E seu nome em minúsculas é ${nomec.value.toLocaleLowerCase()}`;
+                    res.append(p);
+                    p.style.margin = "0rem";
+                    p.style.textAlign = "initial";
+                }
+            }
+
+            function clickn() {
+                alert("OK")
+                close();
+            }
+
+            bots.setAttribute('class', 'botao');
+            bots.setAttribute('id', 'btn1');
+            botn.setAttribute('class', 'botao');
+            botn.setAttribute('id', 'btn2');
+        }
+    </script>
+</body>
+</html>
